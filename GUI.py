@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 import sys
+import crawling
 
 SQLi = ['vulnerabilities']
 manual = ""
@@ -54,12 +55,16 @@ class MainWindow(QMainWindow):
     def execute(self):
         url = self.lineedit.text()
         SQLi.pop()
-        SQLi.append('UNION-based') # 여기에 SQLi 종류 목
+        summary = crawling.summary()
+        for item in summary:
+            SQLi.append(item['Type'])
         self.vuln.takeItem(0)
         self.vuln.addItems(SQLi)
         
     def print_manual(self):
         vulnerable = self.vuln.currentItem().text()
+        if vulnerable == '':
+            manual = "Select SQLi"
         manual = "change your brain" # 여기에 vulnerable에 맞 매뉴얼
         self.man.setText(manual)
 
