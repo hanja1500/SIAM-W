@@ -25,7 +25,7 @@ def SQLi_type(info):
     return data
 
 def parsing_type(data):
-    result = []
+    result = {}
     for line in data[1:]:
         if line[0:4] == 'Type':
             dict = {}
@@ -42,7 +42,7 @@ def parsing_type(data):
         dict[line[0:distinction]] = line[distinction+2:]
 
         if len(dict) >= 3:
-            result.append(dict)
+            result[dict['Type']] = dict
     return result
 
 def summary():
