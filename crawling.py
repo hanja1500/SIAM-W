@@ -6,7 +6,6 @@ sqlmap_info.txt
 로 해놓을 것
 그 목록과 같은 위치에 이 파일이 있어야 하며 fileIO 모듈도 같은 directory에 저장해놓을 것
 '''
-detect = platform.system()
 
 def SQLi_type(info):
     data = []
