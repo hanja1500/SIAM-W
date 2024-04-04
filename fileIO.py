@@ -4,7 +4,7 @@ import pandas as pd
 import platform
 
 
-def pathByos(path):
+def pathByOS(path):
     if platform.system() == 'Windows':
         return path.replace('/', '\\')
     return path
@@ -18,7 +18,7 @@ def read_txt(path):
     Returns: 읽어들인 txt의 line으로 구성된 list
 
     '''
-    path = pathByos(path)
+    path = pathByOS(path)
     
     lines = []
     if os.path.exists(path):
@@ -28,7 +28,7 @@ def read_txt(path):
     return lines
 
 def clear_file(path):
-    path = pathByos(path)
+    path = pathByOS(path)
     
     if platform.system() == 'Windows':
         os.system(f"del {path}")
