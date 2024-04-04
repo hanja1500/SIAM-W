@@ -93,10 +93,6 @@ class MainWindow(QMainWindow):
             manual = manual + ''.join(word) + '\n'
         self.man.setText(manual)
 
-# crawling data 삭제
-def clear_crawl(path):
-    os.system(f"del ")
-
 app = QApplication(sys.argv)
 window = MainWindow()
 window.show()
