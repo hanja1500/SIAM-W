@@ -6,8 +6,6 @@ import fileIO
 sqlmap_info.txt
 로 해놓을 것
 그 목록과 같은 위치에 이 파일이 있어야 하며 fileIO 모듈도 같은 directory에 저장해놓을 것
-생성되는 데이터셋은 파일과 같은 위치에 crawling.csv로 저장됨
-아래에 예시 스크립트 작성해놨으니 이용하시길!
 '''
 
 def SQLi_type(info):

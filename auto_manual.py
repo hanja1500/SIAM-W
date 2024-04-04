@@ -18,7 +18,7 @@ info_path = './sqlmap_info.txt'
 
 # 명령어 입력 자동화
 def call_SQLmap(url):
-    command = f"python3 sqlmap.py -u {url} --batch > sqlmap_info.txt"
+    command = f"python3 ./sqlmap/sqlmap.py -u {url} --batch > sqlmap_info.txt"
     os.system(command)
     
 # crawling data 삭제
