@@ -1,6 +1,7 @@
 import os
 import csv
 import pandas as pd
+import platform
 
 
 def pathByos(path):
@@ -24,8 +25,10 @@ def read_txt(path):
     return lines
 
 def clear_file(path):
-    os.system(f"del {path}")
-
+    if platform.system() == 'Windows':
+        os.system(f"del {path}")
+    else:
+        os.system(f"rm {path}")
 def writecsv(list, path):
     '''
 

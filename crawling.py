@@ -1,5 +1,4 @@
 import fileIO
-import platform
 
 '''
 읽어들일 sqlmap 정보 목록의 파일 이름은
@@ -7,7 +6,6 @@ sqlmap_info.txt
 로 해놓을 것
 그 목록과 같은 위치에 이 파일이 있어야 하며 fileIO 모듈도 같은 directory에 저장해놓을 것
 '''
-detect = platform.system()
 
 def SQLi_type(info):
     data = []
@@ -61,10 +59,7 @@ def summary():
 
 # crawling data 삭제
 def clear_crawl():
-    if detect == 'Windows':
-        fileIO.clear_file('.\sqlmap_info.txt')
-    else:
-        fileIO.clear_file('./sqlmap_info.txt')
+    fileIO.clear_file('./sqlmap_info.txt')
 ''' csv 파일로 저장하고 싶을 경우의 코드
 data_path = './crawling.csv'
 fileIO.clearcsv(data_path)
