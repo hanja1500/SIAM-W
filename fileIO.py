@@ -4,7 +4,7 @@ import pandas as pd
 import platform
 
 
-def pathByos(path):
+def pathBios(path):
     if platform.system() == 'Windows':
         return path.replace('/', '\\')
     return path
