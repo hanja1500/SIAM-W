@@ -1,4 +1,5 @@
 import fileIO
+import platform
 
 '''
 읽어들일 sqlmap 정보 목록의 파일 이름은
@@ -55,8 +56,11 @@ def summary():
 
 # crawling data 삭제
 def clear_crawl():
-    fileIO.clear_file('./sqlmap_info.txt')
-
+    detect = platform.system()
+    if detect == 'Windows':
+        fileIO.clear_file('.\sqlmap_info.txt')
+    else:
+        fileIO.clear_file('./sqlmap_info.txt')
 ''' csv 파일로 저장하고 싶을 경우의 코드
 data_path = './crawling.csv'
 fileIO.clearcsv(data_path)
