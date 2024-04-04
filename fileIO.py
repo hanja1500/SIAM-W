@@ -17,6 +17,9 @@ def read_txt(path):
             lines = file.readlines()
     return lines
 
+def clear_file(path):
+    os.system(f"del {path}")
+
 def writecsv(list, path):
     '''
 

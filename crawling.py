@@ -1,7 +1,6 @@
 import fileIO
 
 '''
-작성: 민예원
 읽어들일 sqlmap 정보 목록의 파일 이름은
 sqlmap_info.txt
 로 해놓을 것
@@ -53,6 +52,10 @@ def summary():
     result = parsing_type(data)
 
     return result
+
+# crawling data 삭제
+def clear_crawl():
+    fileIO.clear_file('./sqlmap_info.txt')
 
 ''' csv 파일로 저장하고 싶을 경우의 코드
 data_path = './crawling.csv'

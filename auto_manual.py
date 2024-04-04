@@ -20,13 +20,4 @@ info_path = './sqlmap_info.txt'
 def call_SQLmap(url):
     command = f"python3 ./sqlmap/sqlmap.py -u {url} --batch > sqlmap_info.txt"
     os.system(command)
-    
-# crawling data 삭제
-def clear_crawl():
-    os.system("del sqlmap_info.txt")
-    
-
-
-
-
 

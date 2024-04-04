@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
             SQLi.pop()
 
         self.summary = crawling.summary()
-        auto_manual.clear_crawl
+        crawling.clear_crawl()
 
         for key in self.summary.keys():
             SQLi.append(key)
@@ -92,6 +92,10 @@ class MainWindow(QMainWindow):
                     word = []
             manual = manual + ''.join(word) + '\n'
         self.man.setText(manual)
+
+# crawling data 삭제
+def clear_crawl(path):
+    os.system(f"del ")
 
 app = QApplication(sys.argv)
 window = MainWindow()
