@@ -5,7 +5,7 @@ import platform
 
 def pathByos(path):
     if platform.system() == 'Windows':
-        return path.replce('/', '₩')
+        return path.replce('/', '\')
     return path
     
 def read_txt(path):
