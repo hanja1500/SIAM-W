@@ -4,7 +4,7 @@ import pandas as pd
 import platform
 
 
-def pathBios(path):
+def pathByos(path):
     if platform.system() == 'Windows':
         return path.replace('/', '\\')
     return path
@@ -18,17 +18,23 @@ def read_txt(path):
     Returns: 읽어들인 txt의 line으로 구성된 list
 
     '''
+    path = pathByos(path)
+    
     lines = []
     if os.path.exists(path):
         with open(path, 'r') as file:
             lines = file.readlines()
+            
     return lines
 
 def clear_file(path):
+    path = pathByos(path)
+    
     if platform.system() == 'Windows':
         os.system(f"del {path}")
     else:
         os.system(f"rm {path}")
+        
 def writecsv(list, path):
     '''
 

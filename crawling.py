@@ -48,8 +48,7 @@ def summary():
     Returns: key 값이 ['Type', 'Title', 'Payload']인 dictionary 배열
 
     '''
-    path = fileIO.pathBios('./sqlmap_info.txt')
-    data = SQLi_type(fileIO.read_txt(path))
+    data = SQLi_type(fileIO.read_txt('./sqlmap_info.txt'))
 
     result = parsing_type(data)
 
@@ -57,9 +56,7 @@ def summary():
 
 # crawling data 삭제
 def clear_crawl():
-
-    path = fileIO.pathBios('./sqlmap_info.txt')
-    fileIO.clear_file(path)
+    fileIO.clear_file('./sqlmap_info.txt')
 
 ''' csv 파일로 저장하고 싶을 경우의 코드
 data_path = './crawling.csv'
