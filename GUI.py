@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
             SQLi.pop()
 
         self.summary = crawling.summary()
-        auto_manual.clear_crawl
+        crawling.clear_crawl()
 
         for key in self.summary.keys():
             SQLi.append(key)

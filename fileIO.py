@@ -2,6 +2,12 @@ import os
 import csv
 import pandas as pd
 
+
+def pathByos(path):
+    if platform.system() == 'Windows':
+        return path.replace('/', '\\')
+    return path
+
 def read_txt(path):
     '''
 
@@ -16,6 +22,9 @@ def read_txt(path):
         with open(path, 'r') as file:
             lines = file.readlines()
     return lines
+
+def clear_file(path):
+    os.system(f"del {path}")
 
 def writecsv(list, path):
     '''

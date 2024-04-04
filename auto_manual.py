@@ -30,22 +30,8 @@ vulnerability_responses = {
     "Out-of-Band SQL Injection": "외부 연결을 필요로 하는 기능을 최소화하여 외부 네트워크에 대한 공격 범위를 줄이세요. 웹 응용 프로그램과 데이터베이스 사이의 통신을 암호화하여 중간자 공격으로부터 보호하세요."
 }
 
-# 각 값의 끝에 따옴표 추가 및 쉼표로 각 요소 구분, 문구 검증 완료
-
-
-info_path = './sqlmap_info.txt'
-
 # 명령어 입력 자동화
 def call_SQLmap(url):
     command = f"python3 ./sqlmap/sqlmap.py -u {url} --batch > sqlmap_info.txt"
     os.system(command)
-    
-# crawling data 삭제
-def clear_crawl():
-    os.system("del sqlmap_info.txt")
-    
-
-
-
-
 
