@@ -2,12 +2,6 @@ import os
 import csv
 import pandas as pd
 
-
-def pathByos(path):
-    if platform.system() == 'Windows':
-        return path.replace('/', '\\')
-    return path
-
 def read_txt(path):
     '''
 
