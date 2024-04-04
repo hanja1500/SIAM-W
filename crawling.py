@@ -61,10 +61,7 @@ def summary():
 
 # crawling data 삭제
 def clear_crawl():
-    if detect == 'Windows':
-        fileIO.clear_file('.\sqlmap_info.txt')
-    else:
-        fileIO.clear_file('./sqlmap_info.txt')
+    fileIO.clear_file('./sqlmap_info.txt')
 ''' csv 파일로 저장하고 싶을 경우의 코드
 data_path = './crawling.csv'
 fileIO.clearcsv(data_path)
