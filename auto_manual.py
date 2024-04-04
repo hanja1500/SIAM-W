@@ -14,8 +14,6 @@ vulnerability_responses = {
 # 추가적인 취약점 유형에 따른 대응 방안을 여기에 추가 가능
 }
 
-info_path = './sqlmap_info.txt'
-
 # 명령어 입력 자동화
 def call_SQLmap(url):
     command = f"python3 ./sqlmap/sqlmap.py -u {url} --batch > sqlmap_info.txt"
