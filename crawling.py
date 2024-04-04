@@ -7,6 +7,7 @@ sqlmap_info.txt
 로 해놓을 것
 그 목록과 같은 위치에 이 파일이 있어야 하며 fileIO 모듈도 같은 directory에 저장해놓을 것
 '''
+detect = platform.system()
 
 def SQLi_type(info):
     data = []
@@ -49,14 +50,17 @@ def summary():
     Returns: key 값이 ['Type', 'Title', 'Payload']인 dictionary 배열
 
     '''
-    data = SQLi_type(fileIO.read_txt('./sqlmap_info.txt'))
+    if detect == 'Windows':
+        data = SQLi_type(fileIO.read_txt('.\sqlmap_info.txt'))
+    else:
+        data = SQLi_type(fileIO.read_txt('./sqlmap_info.txt'))
+
     result = parsing_type(data)
 
     return result
 
 # crawling data 삭제
 def clear_crawl():
-    detect = platform.system()
     if detect == 'Windows':
         fileIO.clear_file('.\sqlmap_info.txt')
     else:

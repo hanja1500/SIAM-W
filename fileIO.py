@@ -1,13 +1,7 @@
 import os
 import csv
 import pandas as pd
-import platform
 
-def pathByos(path):
-    if platform.system() == 'Windows':
-        return path.replce('/', '₩')
-    return path
-    
 def read_txt(path):
     '''
 
@@ -17,7 +11,6 @@ def read_txt(path):
     Returns: 읽어들인 txt의 line으로 구성된 list
 
     '''
-    path = pathByos(path)
     lines = []
     if os.path.exists(path):
         with open(path, 'r') as file:
@@ -25,7 +18,6 @@ def read_txt(path):
     return lines
 
 def clear_file(path):
-    path = pathByos(path)
     os.system(f"del {path}")
 
 def writecsv(list, path):
