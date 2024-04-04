@@ -1,5 +1,4 @@
 import fileIO
-import platform
 
 '''
 읽어들일 sqlmap 정보 목록의 파일 이름은
