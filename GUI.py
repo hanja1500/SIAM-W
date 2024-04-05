@@ -39,12 +39,12 @@ class MainWindow(QMainWindow):
 
         button = QPushButton("Enter")
         button.setFixedSize(QSize(100, 30))
-        button.clicked.connect(self.execute)
+        button.clicked.connect(self.execute) # execute()
         input_layout.addWidget(button)
         
         self.vuln = QListWidget()
         self.vuln.addItems(SQLi)
-        self.vuln.currentItemChanged.connect(self.print_manual)
+        self.vuln.currentItemChanged.connect(self.print_manual) # print_manual()
         layout.addWidget(self.vuln)
 
         self.man = QLabel(manual)

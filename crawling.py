@@ -7,6 +7,7 @@ sqlmap_info.txt
 그 목록과 같은 위치에 이 파일이 있어야 하며 fileIO 모듈도 같은 directory에 저장해놓을 것
 '''
 
+# sqlmap_info.txt를 ---를 기준으로 크롤링
 def SQLi_type(info):
     data = []
     read = False
@@ -21,6 +22,7 @@ def SQLi_type(info):
             read = not read
     return data
 
+# 크롤링한 데이터를 key-value로 parsing
 def parsing_type(data):
     result = {}
     for line in data[1:]:
@@ -42,6 +44,7 @@ def parsing_type(data):
             result[dict['Type']] = dict
     return result
 
+# 크롤링 실행용 함수
 def summary():
     '''
 

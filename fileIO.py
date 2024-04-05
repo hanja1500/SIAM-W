@@ -3,7 +3,7 @@ import csv
 import pandas as pd
 import platform
 
-
+# OS에 따라 경로 표기 방법이 다름을 고려
 def pathByOS(path):
     if platform.system() == 'Windows':
         return path.replace('/', '\\')
@@ -28,6 +28,14 @@ def read_txt(path):
     return lines
 
 def clear_file(path):
+    '''
+
+    Args:
+        path: 삭제할 파일 경로
+
+    Returns:
+
+    '''
     path = pathByOS(path)
     
     if platform.system() == 'Windows':
