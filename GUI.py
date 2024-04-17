@@ -35,6 +35,7 @@ class MainWindow(QMainWindow):
 
         self.lineedit = QLineEdit()
         self.lineedit.setPlaceholderText("Enter your URL")
+        self.lineedit.returnPressed.connect(self.execute) # execute()
         input_layout.addWidget(self.lineedit)
 
         button = QPushButton("Enter")
