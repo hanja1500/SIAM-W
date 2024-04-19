@@ -1,23 +1,25 @@
 import os
 import csv
-import pandas as pd
 import platform
 
 # OS에 따라 경로 표기 방법이 다름을 고려
+
+
 def pathByOS(path):
     if platform.system() == 'Windows':
         return path.replace('/', '\\')
     return path
 
+
 def read_txt(path):
-    '''
+    """
 
     Args:
         path: 읽어들일 txt 경로
 
-    Returns: 읽어들인 txt의 line으로 구성된 list
+    Returns: 읽어들인 txt파일의 line으로 구성된 list
 
-    '''
+    """
     path = pathByOS(path)
     
     lines = []
@@ -27,22 +29,26 @@ def read_txt(path):
             
     return lines
 
+
 def clear_file(path):
-    '''
+    """
 
     Args:
         path: 삭제할 파일 경로
 
     Returns:
 
-    '''
+    """
     path = pathByOS(path)
     
     if platform.system() == 'Windows':
         os.system(f"del {path}")
     else:
         os.system(f"rm {path}")
-        
+
+
+"""
+
 def writecsv(list, path):
     '''
 
@@ -62,7 +68,8 @@ def writecsv(list, path):
             writer = csv.writer(file)
             writer.writerow(list)
 
-def writecsv_dict(dict, path, header = []):
+
+def writecsv_dict(dict, path, header):
     '''
 
     Args:
@@ -73,6 +80,9 @@ def writecsv_dict(dict, path, header = []):
     Returns:
 
     '''
+
+    header = []
+
     if not os.path.exists(path):
         with open(path, 'w', newline='') as file:
             if header != []:
@@ -93,17 +103,18 @@ def writecsv_dict(dict, path, header = []):
 
             for element in dict:
                 writer.writerow(dict[element])
+"""
+
 
 def clearcsv(path):
-    '''
+    """
 
     Args:
         path: 정보를 지울 csv 파일의 위치
 
     Returns:
 
-    '''
+    """
     with open(path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=',')
         writer.writerows([])
-

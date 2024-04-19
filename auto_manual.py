@@ -3,8 +3,8 @@ import os
 
 # SQL Injection 취약점 유형에 따른 대응 방안 매핑
 vulnerability_responses = {
-    '':"Select SQLi",
-    'vulnerabilities':"Select SQLi",
+    '': "Select SQLi",
+    'vulnerabilities': "Select SQLi",
     "UNION query": "UNION based SQL Injection에 대비하여 입력값을 엄격하게 필터링하고, UNION 쿼리 시 결과 열의 수를 일치시키세요.\n"
                    "Prepared Statement를 사용하거나 ORM를 적용하여 쿼리를 작성하세요.",
 
@@ -26,13 +26,11 @@ vulnerability_responses = {
                         "프로시저 내에서 사용자 입력값을 동적으로 생성하거나 실행하지 않도록 하여 보안을 강화하세요."
 
     
-    #추가할 것 있음 여기다 추가하세요~~~
+    # 추가할 것 있음 여기다 추가하세요~~~
 }
-
 
 
 # 명령어 입력 자동화
 def call_SQLmap(url):
     command = f"python3 ./sqlmap/sqlmap.py -u {url} --batch > sqlmap_info.txt"
     os.system(command)
-

@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize    # Qt
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -35,17 +35,17 @@ class MainWindow(QMainWindow):
 
         self.lineedit = QLineEdit()
         self.lineedit.setPlaceholderText("Enter your URL")
-        self.lineedit.returnPressed.connect(self.execute) # execute()
+        self.lineedit.returnPressed.connect(self.execute)           # execute()
         input_layout.addWidget(self.lineedit)
 
         button = QPushButton("Enter")
         button.setFixedSize(QSize(100, 30))
-        button.clicked.connect(self.execute) # execute()
+        button.clicked.connect(self.execute)                        # execute()
         input_layout.addWidget(button)
         
         self.vuln = QListWidget()
         self.vuln.addItems(SQLi)
-        self.vuln.currentItemChanged.connect(self.print_manual) # print_manual()
+        self.vuln.currentItemChanged.connect(self.print_manual)     # print_manual()
         layout.addWidget(self.vuln)
 
         self.man = QLabel(manual)
@@ -77,6 +77,8 @@ class MainWindow(QMainWindow):
         self.vuln.addItems(SQLi)
         
     def print_manual(self):
+        global manual
+
         try:
             vulnerable = self.vuln.currentItem().text()
         except AttributeError:
@@ -87,7 +89,7 @@ class MainWindow(QMainWindow):
             manual = manual + '\n\n| 세부 유형 |\n' + self.summary[vulnerable]['Title']
             manual = manual + '\n\n| Payload |\n'
             full_word = self.summary[vulnerable]['Payload']
-        except:
+        except AttributeError:
             full_word = ''
             manual = "Select SQLi"
 
@@ -104,6 +106,7 @@ class MainWindow(QMainWindow):
             manual = manual + '\n'
 
         self.man.setText(manual)
+
 
 app = QApplication(sys.argv)
 window = MainWindow()
