@@ -77,20 +77,32 @@ class MainWindow(QMainWindow):
         self.vuln.addItems(SQLi)
         
     def print_manual(self):
-        vulnerable = self.vuln.currentItem().text()
-        
+        try:
+            vulnerable = self.vuln.currentItem().text()
+        except AttributeError:
+            vulnerable = ''
+
         manual = auto_manual.vulnerability_responses[vulnerable]
-        manual = manual + '\n\n| 세부 유형 |\n' + self.summary[vulnerable]['Title']
-        manual = manual + '\n\n| Payload |\n'
+        try:
+            manual = manual + '\n\n| 세부 유형 |\n' + self.summary[vulnerable]['Title']
+            manual = manual + '\n\n| Payload |\n'
+            full_word = self.summary[vulnerable]['Payload']
+        except:
+            full_word = ''
+            manual = "Select SQLi"
+
         word = []
-        full_word = self.summary[vulnerable]['Payload']
-        
+
         for i in range(len(full_word)):
             word.append(full_word[i])
             if (i + 1) % 100 == 0:
                 manual = manual + ''.join(word) + '\n'
                 word = []
-        manual = manual + ''.join(word) + '\n'
+        try:
+            manual = manual + ''.join(word) + '\n'
+        except AttributeError:
+            manual = manual + '\n'
+
         self.man.setText(manual)
 
 app = QApplication(sys.argv)

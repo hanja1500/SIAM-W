@@ -3,6 +3,8 @@ import os
 
 # SQL Injection 취약점 유형에 따른 대응 방안 매핑
 vulnerability_responses = {
+    '':"Select SQLi",
+    'vulnerabilities':"Select SQLi",
     "UNION query": "UNION based SQL Injection에 대비하여 입력값을 엄격하게 필터링하고, UNION 쿼리 시 결과 열의 수를 일치시키세요.\n"
                    "Prepared Statement를 사용하거나 ORM를 적용하여 쿼리를 작성하세요.",
 

@@ -51,7 +51,11 @@ def summary():
     Returns: key 값이 ['Type', 'Title', 'Payload']인 dictionary 배열
 
     '''
-    data = SQLi_type(fileIO.read_txt('./sqlmap_info.txt'))
+    try:
+        data = SQLi_type(fileIO.read_txt('./sqlmap_info.txt'))
+    except FileNotFoundError:
+        base = ''
+        return base
 
     result = parsing_type(data)
 
