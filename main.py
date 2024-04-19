@@ -73,25 +73,24 @@ class MainWindow(QMainWindow):
 
         while self.vuln.count():
             self.vuln.takeItem(0)
+        self.man.setText('Select SQLi')
         self.vuln.addItems(SQLi)
         
     def print_manual(self):
         vulnerable = self.vuln.currentItem().text()
         
-        if vulnerable == '' or vulnerable == 'vulnerabilities':
-            manual = "Select SQLi"
-        else:
-            manual = auto_manual.vulnerability_responses[vulnerable]
-            manual = manual + '\n\n| 세부 유형 |\n' + self.summary[vulnerable]['Title']
-            manual = manual + '\n\n| Payload |\n'
-            word = []
-            full_word = self.summary[vulnerable]['Payload']
-            for i in range(len(full_word)):
-                word.append(full_word[i])
-                if (i + 1) % 100 == 0:
-                    manual = manual + ''.join(word) + '\n'
-                    word = []
-            manual = manual + ''.join(word) + '\n'
+        manual = auto_manual.vulnerability_responses[vulnerable]
+        manual = manual + '\n\n| 세부 유형 |\n' + self.summary[vulnerable]['Title']
+        manual = manual + '\n\n| Payload |\n'
+        word = []
+        full_word = self.summary[vulnerable]['Payload']
+        
+        for i in range(len(full_word)):
+            word.append(full_word[i])
+            if (i + 1) % 100 == 0:
+                manual = manual + ''.join(word) + '\n'
+                word = []
+        manual = manual + ''.join(word) + '\n'
         self.man.setText(manual)
 
 app = QApplication(sys.argv)
