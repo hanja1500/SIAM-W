@@ -60,6 +60,7 @@ class MainWindow(QMainWindow):
 
         central_widget = QWidget()
         central_widget.setLayout(layout)
+        central_widget.setMinimumSize(800, 600)
 
         self.setCentralWidget(central_widget)
 
