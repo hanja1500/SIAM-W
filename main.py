@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QVBoxLayout,
     QWidget,
+    QScrollArea
 )
 import sys
 import crawling
@@ -50,7 +51,12 @@ class MainWindow(QMainWindow):
 
         self.man = QLabel(manual)
         self.man.setMaximumWidth(1000)
-        layout.addWidget(self.man)
+
+        self.scroll = QScrollArea()
+        self.scroll.setWidgetResizable(True)
+        self.scroll.setWidget(self.man)
+        
+        layout.addWidget(self.scroll)
 
         central_widget = QWidget()
         central_widget.setLayout(layout)
