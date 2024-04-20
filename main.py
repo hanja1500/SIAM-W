@@ -85,6 +85,8 @@ class MainWindow(QMainWindow):
             vulnerable = ''
 
         manual = auto_manual.vulnerability_responses[vulnerable]
+        manual = manual + '\n\n| 대응 방안 |\n\n' + auto_manual.vulnerability_countermeasures[vulnerable]
+
         try:
             manual = manual + '\n\n| 세부 유형 |\n' + self.summary[vulnerable]['Title']
             manual = manual + '\n\n| Payload |\n'
@@ -92,6 +94,7 @@ class MainWindow(QMainWindow):
         except AttributeError:
             full_word = ''
             manual = "Select SQLi"
+
 
         word = []
 

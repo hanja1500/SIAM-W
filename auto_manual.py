@@ -25,8 +25,57 @@ vulnerability_responses = {
                         "입력값의 유효성을 검사하고, 실행 결과를 신뢰할 수 있는지 확인하세요.\n"
                         "프로시저 내에서 사용자 입력값을 동적으로 생성하거나 실행하지 않도록 하여 보안을 강화하세요."
 
-    
-    # 추가할 것 있음 여기다 추가하세요~~~
+}
+
+
+vulnerability_countermeasures = {
+    '': "Select SQLi",
+    'vulnerabilities': "Select SQLi",
+    "UNION query": 'String sql = "SELECT * FROM users WHERE name = ?";\n\n'
+                   "// 블랙 리스트 방식: 거부할 문자 및 키워드 정의\n\n"
+                   "$blacklist = ['select', 'insert', 'update', 'shutdown', 'delete', 'drop',"
+                   "'--', "'", '"', '=', ';', 'union', 'group by', 'if', 'column', 'end', 'instance'];\n\n"
+                   "// 화이트 리스트 방식: 허용할 문자 패턴 정의 (예: 알파벳, 숫자, 공백)"
+                   "$whitelist_pattern = '/^[a-zA-Z0-9\\s]+$/';\n\n"
+                   "function validate_input($input_value) {\n"
+                   "    global $blacklist, $whitelist_pattern;\n\n"
+                   "    // 블랙 리스트 방식: 거부할 문자나 키워드가 입력값에 포함되어 있는지 확인\n"
+                   "    foreach ($blacklist as $item) {\n"
+                   "        if (stripos($input_value, $item) !== false) {\n"
+                   "            return false;\n"
+                   "        }\n"
+                   "    }\n\n"
+                   "    // 화이트 리스트 방식: 입력값이 허용된 패턴에 일치하는지 확인\n"
+                   "    if (!preg_match($whitelist_pattern, $input_value)) {\n"
+                   "        return false;\n"
+                   "    }\n\n"
+                   "    // 모든 검증 통과\n"
+                   "    return true;\n"
+                   "}\n\n"
+                   "foreach ($input_values as $value) {\n"
+                   "    if (validate_input($value)) {\n"
+                   '        echo "Input "$value" is valid\\n";\n'
+                   '    } else {\n'
+                   '        echo "Input "$value" is invalid\\n";\n'
+                   "    }\n"
+                   "}\n",
+
+    "error-based": "에러 메시지 노출을 최소화하여 공격자에게 민감한 정보를 노출하지 않도록 주의하세요.\n"
+                   "정적 쿼리 또는 ORM을 사용하여 쿼리를 작성하세요.\n"
+                   "에러 기반 SQL Injection에 대비하여 입력값을 엄격하게 검증하고, 예외 처리를 강화하세요.",
+
+    "time-based blind": "실행 시간이 긴 쿼리에 대한 응답 시간을 모니터링 외에도 CPU 및 메모리 사용량 모니터링을 통해 시간 지연 공격을 탐지하여 대응하세요.\n"
+                        "대량의 데이터 처리를 요구하는 작업에서는 비동기 처리 및 캐싱을 활용하여 응답 시간을 최적화하세요.",
+
+    "boolean-based blind": "에러 메시지 노출을 최소화하여 공격자에게 정보를 노출하지 않도록 보호하세요.\n"
+                           "보안 관련 로그를 잘 기록하여 시도된 공격을 모니터링하고 대응하세요.",
+
+    "Out-of-Band SQL Injection": "외부 연결을 필요로 하는 기능을 최소화하여 외부 네트워크에 대한 공격 범위를 줄이세요.\n"
+                                 "웹 응용 프로그램과 데이터베이스 사이의 통신을 암호화하여 중간자 공격으로부터 보호하세요.",
+
+    "stored procedure": "프로시저를 호출할 때 필요한 최소한의 권한을 부여하여 보안을 강화하세요.\n"
+                        "입력값의 유효성을 검사하고, 실행 결과를 신뢰할 수 있는지 확인하세요.\n"
+                        "프로시저 내에서 사용자 입력값을 동적으로 생성하거나 실행하지 않도록 하여 보안을 강화하세요."
 }
 
 
