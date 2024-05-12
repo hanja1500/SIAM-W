@@ -49,6 +49,7 @@ def process_file(file_path):
     # 필요한 조건을 포함하는 라인 추출
     relevant_lines = []
     for i, line in enumerate(lines):
+        # '$' 문자가 포함되고, SQL 인젝션에 취약한 함수가 사용되었는지 확인
         if '$' in line and any(func in line for func in ['mysqli_query', 'mysqli_fetch_array', 'mysqli_fetch_assoc', 'mysqli_fetch_row', 'mysqli_fetch_object', 'mysqli_real_escape_string', 'PDO::query', 'PDO::prepare', 'PDOStatement::execute', 'PDOStatement::fetch']):  
             relevant_lines.append((i, line.strip()))
     
