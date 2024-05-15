@@ -65,9 +65,9 @@ def save_to_csv(data, output_file):
     df.to_csv(output_file, index=False)
 
 # 메인 함수
-def main():
+def main(file_path):
     # 파일 입력 받기
-    file_path = input("파일 경로를 입력하세요: ")
+    # file_path = input("파일 경로를 입력하세요: ")
 
     # 파일 처리 후 필요한 조건을 만족하는 라인 추출
     relevant_lines = process_file(file_path)

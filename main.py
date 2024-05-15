@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize    # Qt
+from PySide6.QtCore import QSize, Qt
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -9,11 +9,15 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QVBoxLayout,
     QWidget,
-    QScrollArea
+    QScrollArea,
+    QDialog,
+    QFileDialog
 )
 import sys
 import crawling
 import auto_manual
+import SaveLine_Extraction as se
+import pandas as pd
 
 SQLi = ['vulnerabilities']
 manual = "Select SQLi"
@@ -28,8 +32,15 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
 
+        notice_layout = QHBoxLayout()
+
         notify = QLabel("Enter your URL to receive manual")
-        layout.addWidget(notify)
+        code_button = QPushButton("revice your code")
+        code_button.setFixedSize(200, 30)
+        code_button.clicked.connect(self.codeRevice)
+        notice_layout.addWidget(notify)
+        notice_layout.addWidget(code_button)
+        layout.addLayout(notice_layout)
         
         input_layout = QHBoxLayout()
         layout.addLayout(input_layout)
@@ -63,6 +74,59 @@ class MainWindow(QMainWindow):
         central_widget.setMinimumSize(800, 600)
 
         self.setCentralWidget(central_widget)
+
+        self.dialog = None
+        self.line = []
+
+    def codeRevice(self):
+        if self.dialog is None:
+            self.dialog = QDialog(self)
+
+        self.dialog.setWindowTitle('Revice Your Code!')
+        self.dialog.setWindowModality(Qt.ApplicationModal)
+        self.dialog.resize(500, 400)
+        
+        dialog_layout = QVBoxLayout(self.dialog)
+        beginning_layout = QHBoxLayout()
+
+        explanatory = QLabel("Select Your File here ->", self.dialog)
+        file_button = QPushButton('Open', self.dialog)
+        file_button.setFixedSize(80, 30)
+        file_button.clicked.connect(self.open)
+        beginning_layout.addStretch()
+        beginning_layout.addWidget(explanatory)
+        beginning_layout.addWidget(file_button)
+
+        self.reviced_code = QScrollArea(self.dialog)
+        self.reviced_code.setWidget(QLabel('your code will be reviced and show here.')) 
+        
+        dialog_layout.addLayout(beginning_layout)
+        dialog_layout.addWidget(self.reviced_code)
+
+        self.dialog.show()
+
+    def open(self):
+        codes = QVBoxLayout()
+
+        file_name = QFileDialog.getOpenFileName(self)[0]
+        se.main(file_name)
+        revice_list = pd.read_csv('/output.csv')
+
+        print(revice_list)
+        with open(file_name) as file:
+            code = file.readlines()
+
+        self.reviced_code.takeWidget()
+        
+        self.line.clear()
+        for idx in range(len(code)):
+            self.line.append(QLabel(code[idx], self.dialog))
+        for idx in range(len(code)):
+            codes.addWidget(self.line[idx])
+        code_widget = QWidget()
+        code_widget.setLayout(codes)
+        self.reviced_code.setWidget(code_widget)
+        
 
     def execute(self):
         self.summary = {}
