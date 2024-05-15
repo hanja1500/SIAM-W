@@ -116,7 +116,7 @@ class MainWindow(QMainWindow):
             revice_list = []
 
         print(revice_list)
-        with open(file_name) as file:
+        with open(file_name, 'r') as file:
             code = file.readlines()
 
         self.reviced_code.takeWidget()
