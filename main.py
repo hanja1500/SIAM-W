@@ -109,8 +109,8 @@ class MainWindow(QMainWindow):
         codes = QVBoxLayout()
 
         file_name = QFileDialog.getOpenFileName(self)[0]
-        se.main(file_name)
-        revice_list = pd.read_csv('/output.csv')
+        # se.main(file_name)
+        # revice_list = pd.read_csv('/output.csv')
 
         print(revice_list)
         with open(file_name) as file:
