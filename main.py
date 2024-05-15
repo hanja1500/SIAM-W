@@ -1,4 +1,5 @@
 from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QFont, QColor
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -11,7 +12,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QScrollArea,
     QDialog,
-    QFileDialog
+    QFileDialog,
 )
 import sys
 import crawling
@@ -113,19 +114,45 @@ class MainWindow(QMainWindow):
         try:
             revice_list = pd.read_csv('/output.csv')
         except:
-            revice_list = []
-
-        print(revice_list)
+            revice_list = pd.DataFrame([{'Line Number': -1, 'Content': '<<< Clean Code ! >>>'},
+                                        {'Line Number': -2, 'Content': 'No edit point in this code :)'},
+                                        {'Line Number': -3, 'Content': 'Here is your code.'},
+                                        ])
+        revice_list.set_index('Line Number', inplace=True)
+        idx_list = list(revice_list.index.values)
+        
+        
         with open(file_name, 'r') as file:
             code = file.readlines()
 
         self.reviced_code.takeWidget()
         
         self.line.clear()
+        n = 0
+        font = QFont()
+        font.setBold(True)
+        
+        if -1 in idx_list:
+            for i in [-1, -2, -3]:
+                self.line.append(QLabel(revice_list.loc[i, 'Content'], self.dialog))
+                
+                self.line[n].setFont(font)
+                self.line[n].setStyleSheet("background-color: blue")
+                
+                n = n + 1
+            self.line.append(QLabel('\n\n'))
         for idx in range(len(code)):
-            self.line.append(QLabel(code[idx], self.dialog))
+            if idx in idx_list:
+                self.line.append(QLabel(revice_list.loc[idx, 'Content'], self.dialog))
+                self.line[n + 1].setFont(font)
+                self.line[n + 1].setStyleSheet("background-color: orange")
+            else:
+                self.line.append(QLabel(code[idx], self.dialog))
+            n = n + 1
+                    
         for idx in range(len(code)):
             codes.addWidget(self.line[idx])
+        
         code_widget = QWidget()
         code_widget.setLayout(codes)
         self.reviced_code.setWidget(code_widget)
