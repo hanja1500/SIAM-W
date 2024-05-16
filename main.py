@@ -142,12 +142,13 @@ class MainWindow(QMainWindow):
                 n = n + 1
             self.line.append(QLabel('\n\n'))
         for idx in range(len(code)):
+            # HTML string escape
             if idx in idx_list:
-                self.line.append(QLabel(revice_list.loc[idx, 'Content'], self.dialog))
+                self.line.append(QLabel(revice_list.loc[idx, 'Content'].replace('<', '&lt;'), self.dialog))
                 self.line[n + 1].setFont(font)
                 self.line[n + 1].setStyleSheet("background-color: orange")
             else:
-                self.line.append(QLabel(code[idx], self.dialog))
+                self.line.append(QLabel(code[idx][:-1].replace('<', '&lt;'), self.dialog))
             n = n + 1
                     
         for idx in range(len(code)):
