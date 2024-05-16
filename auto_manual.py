@@ -23,7 +23,7 @@ vulnerability_responses = {
     "Out-of-Band SQL Injection": "외부 연결을 필요로 하는 기능을 최소화하여 외부 네트워크에 대한 공격 범위를 줄이세요.\n"
                                  "웹 응용 프로그램과 데이터베이스 사이의 통신을 암호화하여 중간자 공격으로부터 보호하세요.",
 
-    "stored procedure": "프로시저를 호출할 때 필요한 최소한의 권한을 부여하여 보안을 강화하세요.\n"
+    "stacked queries": "프로시저를 호출할 때 필요한 최소한의 권한을 부여하여 보안을 강화하세요.\n"
                         "입력값의 유효성을 검사하고, 실행 결과를 신뢰할 수 있는지 확인하세요.\n"
                         "프로시저 내에서 사용자 입력값을 동적으로 생성하거나 실행하지 않도록 하여 보안을 강화하세요."
 
@@ -46,7 +46,7 @@ response_to_countermeasure = {
 
     "Out-of-Band SQL Injection": ["prepared_statement", "DAL", "encrypting"],
 
-    "stored procedure": ["checking_input", "least_previllege"]
+    "stacked queries": ["checking_input", "least_privilege"]
 
 }
 
