@@ -1,5 +1,94 @@
-import asyncio
-import re
+'''
+1. 입력값 검증 강화
+2. 프리페이드 스테이트
+3. 에러 메세지 정보
+
+4. 서버 보안 강화
+5. 비동기 처리 / 캐싱
+6. 최소 권한 부여
+7. 탐색용 DB 분리
+8. 데이터 암호화
+'''
+import os
+import pandas as pd
+
+# 필요한 조건을 포함하는 라인 추출
+relevant_lines = []
+
+# def
+
+def process_file(file_path):
+    global relevant_lines
+    try:
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+    except FileNotFoundError:
+        return []
+
+    for i, line in enumerate(lines):
+        # PHP 파일인 경우에만 처리
+        if os.path.splitext(file_path)[1] == ".php":
+            if '$' in line or any(func in line for func in ['mysqli_query', 'mysqli_fetch_array', 'mysqli_fetch_assoc',
+                                                            'mysqli_fetch_row', 'mysqli_fetch_object',
+                                                            'mysqli_real_escape_string', 'PDO::query',
+                                                            'PDO::prepare', 'PDOStatement::execute',
+                                                            'PDOStatement::fetch']):
+                relevant_lines.append((i, line.strip()))
+        else:
+            break
+
+    checking(file_path)
+
+# 입력값 검증 강화
+def checking(file_path):
+    global relevant_lines
+
+    check = setting = 0
+    for i, line in enumerate(relevant_lines):
+        if "[a-zA-Z0-9]" not in line:
+            continue
+        else:
+            check = 1
+            break
+
+    if check == 0:
+        for (ii, iline) in enumerate(relevant_lines):
+            if "SELECT" in iline[1]:
+                relevant_lines.insert(ii, (iline[0], "$match = '/^[a-zA-z0-9]+$/'"))
+                relevant_lines.insert(ii+1, (iline[0]+1, "if(!preg_match($match, $<variable>)){"))
+                relevant_lines.insert(ii+2, (iline[0]+2, 'echo "<script>alert("use only alphabet and numbers")</script>"; exit;}'))
+                break
+            else:
+                continue
+        for (ii, iline) in enumerate(relevant_lines):
+            if "use only alphabet and numbers" in iline[1]:
+                setting = 1
+                continue
+
+            if setting == 1:
+                relevant_lines[ii] = (iline[0]+3, iline[1])
+            else:
+                continue
+
+    df = pd.DataFrame(relevant_lines, columns=['Line Number', 'Content'])
+    df.to_csv("./output.csv", index=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''import re
 import pymysql
 import pandas as pd
 
@@ -32,10 +121,8 @@ def execute_query(conn, username):
             print("쿼리 실행 중 오류가 발생했습니다.")
 
 # 비동기 처리: async 키워드를 사용하여 비동기 함수를 정의
-async def delay_response():
-    print("비동기 처리 시작")
-    await asyncio.sleep(5)  # 5초간 대기
-    print("비동기 처리 완료")
+def delay_response():
+
 
 # 파일 입력 받은 후 라인별로 구분하여 필요한 조건이 있는 라인 추출
 def process_file(file_path):
@@ -51,7 +138,11 @@ def process_file(file_path):
     for i, line in enumerate(lines):
         # PHP 파일인 경우에만 처리
         if file_path.endswith('.php'):
-            if '$' in line and any(func in line for func in ['mysqli_query', 'mysqli_fetch_array', 'mysqli_fetch_assoc', 'mysqli_fetch_row', 'mysqli_fetch_object', 'mysqli_real_escape_string', 'PDO::query', 'PDO::prepare', 'PDOStatement::execute', 'PDOStatement::fetch']):  
+            if '$' in line or any(func in line for func in ['mysqli_query', 'mysqli_fetch_array', 'mysqli_fetch_assoc',
+                                                             'mysqli_fetch_row', 'mysqli_fetch_object',
+                                                             'mysqli_real_escape_string', 'PDO::query',
+                                                             'PDO::prepare', 'PDOStatement::execute',
+                                                             'PDOStatement::fetch']):
                 relevant_lines.append((i, line.strip()))
         else:
             print("PHP 파일이 아닙니다.")
@@ -80,18 +171,4 @@ def main(file_path):
     output_file = 'output.csv'
     save_to_csv(relevant_lines, output_file)
     print(f"추출된 데이터를 {output_file}로 저장했습니다.")
-
-    # 사용자 입력 받기
-    username = input("사용자 이름을 입력하세요: ")
-
-    # 에러메세지 최소화: 데이터베이스 연결
-    conn = database_connect()
-    if conn:
-        # 프리페어드: 쿼리 실행
-        execute_query(conn, username)
-
-        # 비동기처리: 비동기 함수 실행
-        asyncio.run(delay_response())  # 비동기 함수 실행
-
-if __name__ == "__main__":
-    main()
+'''

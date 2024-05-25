@@ -110,7 +110,8 @@ class MainWindow(QMainWindow):
         codes = QVBoxLayout()
 
         file_name = QFileDialog.getOpenFileName(self)[0]
-        se.main(file_name)
+        # se.main(file_name)
+        se.process_file(file_name)
         try:
             revice_list = pd.read_csv('/output.csv')
         except:
@@ -137,7 +138,7 @@ class MainWindow(QMainWindow):
                 self.line.append(QLabel(revice_list.loc[i, 'Content'], self.dialog))
                 
                 self.line[n].setFont(font)
-                self.line[n].setStyleSheet("background-color: blue")
+                self.line[n].setStyleSheet("color: white; background-color: blue")
                 
                 n = n + 1
             self.line.append(QLabel('\n\n'))
