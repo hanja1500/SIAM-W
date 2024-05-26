@@ -143,7 +143,6 @@ class MainWindow(QMainWindow):
             self.line.append(QLabel('\n\n'))
         
         for idx in range(len(code)):
-            print(idx, code[idx], '\n')
             # HTML string escape
             if idx in idx_list:
                 self.line.append(QLabel(revice_list.loc[idx, 'Content'], self.dialog))
