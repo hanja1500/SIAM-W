@@ -113,7 +113,7 @@ class MainWindow(QMainWindow):
         # se.main(file_name)
         se.process_file(file_name)
         try:
-            revice_list = pd.read_csv('/output.csv')
+            revice_list = pd.read_csv('./output.csv')
         except:
             revice_list = pd.DataFrame([{'Line Number': -1, 'Content': '<<< Clean Code ! >>>'},
                                         {'Line Number': -2, 'Content': 'No edit point in this code :)'},
@@ -122,10 +122,9 @@ class MainWindow(QMainWindow):
         revice_list.set_index('Line Number', inplace=True)
         idx_list = list(revice_list.index.values)
         
-        
         with open(file_name, 'r') as file:
             code = file.readlines()
-
+        
         self.reviced_code.takeWidget()
         
         self.line.clear()
@@ -142,14 +141,16 @@ class MainWindow(QMainWindow):
                 
                 n = n + 1
             self.line.append(QLabel('\n\n'))
+        
         for idx in range(len(code)):
+            print(idx, code[idx], '\n')
             # HTML string escape
             if idx in idx_list:
-                self.line.append(QLabel(revice_list.loc[idx, 'Content'].replace('<', '&lt;'), self.dialog))
-                self.line[n + 1].setFont(font)
-                self.line[n + 1].setStyleSheet("background-color: orange")
+                self.line.append(QLabel(revice_list.loc[idx, 'Content'], self.dialog))
+                self.line[n].setFont(font)
+                self.line[n].setStyleSheet("background-color: orange")
             else:
-                self.line.append(QLabel(code[idx][:-1].replace('<', '&lt;'), self.dialog))
+                self.line.append(QLabel(code[idx].replace('<', '&lt;'), self.dialog))
             n = n + 1
                     
         for idx in range(len(code)):
