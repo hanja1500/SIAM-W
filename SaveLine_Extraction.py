@@ -11,9 +11,11 @@
 '''
 import os
 import pandas as pd
+import platform
 
 # 필요한 조건을 포함하는 라인 추출
 relevant_lines = []
+change_lines = []
 
 # def
 
@@ -54,25 +56,16 @@ def checking(file_path):
     if check == 0:
         for (ii, iline) in enumerate(relevant_lines):
             if "SELECT" in iline[1]:
-                relevant_lines.insert(ii, (iline[0], "$match = '/^[a-zA-z0-9]+$/'"))
-                relevant_lines.insert(ii+1, (iline[0]+1, "if(!preg_match($match, $<variable>)){"))
-                relevant_lines.insert(ii+2, (iline[0]+2, 'echo "<script>alert("use only alphabet and numbers")</script>"; exit;}'))
+                change_lines.insert(ii, (iline[0], "$match = '/^[a-zA-z0-9]+$/'\nif(!preg_match($match, $<variable>)){\necho '<script>alert('use only alphabet and numbers')'</script>';\nexit;}\n"+iline[1]))
                 break
             else:
                 continue
-        for (ii, iline) in enumerate(relevant_lines):
-            if "use only alphabet and numbers" in iline[1]:
-                setting = 1
-                continue
 
-            if setting == 1:
-                relevant_lines[ii] = (iline[0]+3, iline[1])
-            else:
-                continue
-
-    df = pd.DataFrame(relevant_lines, columns=['Line Number', 'Content'])
-    df.to_csv("./output.csv", index=False)
-
+    df = pd.DataFrame(change_lines, columns=['Line Number', 'Content'])
+    if platform.system() == 'Windows':
+        df.to_csv("output.csv", index=False)
+    else:
+        df.to_csv("./output.csv", index=False)
 
 
 
