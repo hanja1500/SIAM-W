@@ -1,3 +1,5 @@
+import os
+
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QFont, QColor
 from PySide6.QtWidgets import (
@@ -110,7 +112,6 @@ class MainWindow(QMainWindow):
         codes = QVBoxLayout()
 
         file_name = QFileDialog.getOpenFileName(self)[0]
-        # se.main(file_name)
         se.process_file(file_name)
         try:
             revice_list = pd.read_csv('./output.csv')
@@ -158,6 +159,7 @@ class MainWindow(QMainWindow):
         code_widget = QWidget()
         code_widget.setLayout(codes)
         self.reviced_code.setWidget(code_widget)
+        os.remove("./output.csv")
         
 
     def execute(self):
