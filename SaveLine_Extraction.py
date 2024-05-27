@@ -19,10 +19,6 @@ import platform
 relevant_lines = []
 change_lines = []
 
-
-# def
-
-
 def process_file(file_path):
     global relevant_lines
 
