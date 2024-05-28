@@ -6,6 +6,7 @@
 * Usage : 'python main.py'
 
 * You can wacth the screen pop up like the under screenshot.
-/screen1.png
+
+![screen1](https://github.com/hanja1500/SIAM-W/assets/39050052/6256a34f-3034-4e40-b852-d010490af7a8)
 
 * Plz Use it Freely! 
