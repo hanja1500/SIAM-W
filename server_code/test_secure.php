@@ -1,5 +1,5 @@
 <?php
-    #session_start();
+    session_start();
     $username = $_GET['id'];
     $userpass = $_GET['pw'];
 
