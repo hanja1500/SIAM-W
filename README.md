@@ -3,3 +3,9 @@
 ### Yewon Min / Suwon Kim / Yohan Lee
 
 * This is graduation team project for 1st semester, 2024, Major in Industrial Security, DKU, Republic of Korea.
+* Usage : 'python main.py'
+
+* You can wacth the screen pop up like the under screenshot.
+/screen1.png
+
+* Plz Use it Freely! 
