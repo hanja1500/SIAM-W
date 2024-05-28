@@ -3,6 +3,8 @@
 ### Yewon Min / Suwon Kim / Yohan Lee
 
 * This is graduation team project for 1st semester, 2024, Major in Industrial Security, DKU, Republic of Korea.
+* Use after Python 3.6
+* Supporting in Linux, Windows, MacOS and More.
 * Usage : ```python main.py```
 
 * You can wacth the screen pop up like the under screenshot.
