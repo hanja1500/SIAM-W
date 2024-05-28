@@ -14,4 +14,6 @@
 * Plz Use it Freely! 
 
 * You can make simple server with files in server_code directory.
-* Used Dummy Server Condition : Ubuntu 22.04.3 LTS / php8.1-fpm (php 8.1.2)​ / nginx 1.24.0 / MariaDB 10.6.16
+* Used Dummy Server Condition :
+
+Ubuntu 22.04.3 LTS / php8.1-fpm (php 8.1.2)​ / nginx 1.24.0 / MariaDB 10.6.16
