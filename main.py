@@ -166,7 +166,8 @@ class MainWindow(QMainWindow):
         code_widget = QWidget()
         code_widget.setLayout(codes)
         self.reviced_code.setWidget(code_widget)
-        os.remove("./output.csv")
+        if idx_list:
+            os.remove("./output.csv")
         
 
     def execute(self):

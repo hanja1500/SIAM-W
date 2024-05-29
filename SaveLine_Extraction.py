@@ -9,6 +9,10 @@ change_lines = []
 
 def process_file(file_path):
     global relevant_lines
+    global change_lines
+
+    relevant_lines = []
+    change_lines = []
 
     try:
         with open(file_path, 'r') as file:
