@@ -81,8 +81,14 @@ class MainWindow(QMainWindow):
         self.dialog = None
         self.line = []
 
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Escape:
+            self.close()
+
     def codeRevice(self):
         if self.dialog is None:
+            self.dialog = QDialog(self)
+        else:
             self.dialog = QDialog(self)
 
         self.dialog.setWindowTitle('Revice Your Code!')
@@ -109,6 +115,7 @@ class MainWindow(QMainWindow):
         self.dialog.show()
 
     def open(self):
+        self.line.clear()
         codes = QVBoxLayout()
 
         file_name = QFileDialog.getOpenFileName(self)[0]
@@ -135,7 +142,7 @@ class MainWindow(QMainWindow):
         
         if -1 in idx_list:
             for i in [-1, -2, -3]:
-                self.line.append(QLabel(revice_list.loc[i, 'Content'], self.dialog))
+                self.line.append(QLabel(str(revice_list.loc[i, 'Content']), self.dialog))
                 
                 self.line[n].setFont(font)
                 self.line[n].setStyleSheet("color: white; background-color: blue")
@@ -146,7 +153,7 @@ class MainWindow(QMainWindow):
         for idx in range(len(code)):
             # HTML string escape
             if idx in idx_list:
-                self.line.append(QLabel(revice_list.loc[idx, 'Content'], self.dialog))
+                self.line.append(QLabel(str(revice_list.loc[idx, 'Content']), self.dialog))
                 self.line[n].setFont(font)
                 self.line[n].setStyleSheet("background-color: orange")
             else:
