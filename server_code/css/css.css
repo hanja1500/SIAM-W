@@ -1,0 +1,193 @@
+/* Reset 기본 스타일 */
+body, h1, h2, h3, p, ul, li, a, div, input, button, textarea {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* 공통 페이지 레이아웃 */
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.board_wrap {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* 공통 제목 섹션 */
+.board_title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.board_title strong {
+    font-size: 24px;
+    color: #007bff;
+}
+
+.board_title p {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* 공통 입력 폼 */
+textarea, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+    background-color: #f8f9fa;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus, input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* 리스트 페이지 스타일 */
+.board_list {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 리스트 헤더 */
+.board_list .top {
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr 2fr 1fr;
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+}
+
+/* 리스트 행 */
+.board_list .row {
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr 2fr 1fr;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.board_list .row:last-child {
+    border-bottom: none;
+}
+
+/* 제목 링크 스타일 */
+.board_list .title a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.board_list .title a:hover {
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
+button, a.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+/* 버튼 색상 */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* 수정, 글쓰기 페이지 */
+.board_write dl {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.board_write dt {
+    width: 100px;
+    font-weight: bold;
+    color: #555;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.board_write dd {
+    flex: 1;
+}
+
+textarea {
+    min-height: 150px;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .board_list .top, .board_list .row {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .board_list .row div {
+        margin-bottom: 10px;
+    }
+
+    .board_list .row div:last-child {
+        margin-bottom: 0;
+    }
+
+    .board_write dl {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .board_write dt {
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    button, a.btn {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+
