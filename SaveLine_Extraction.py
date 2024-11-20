@@ -55,19 +55,18 @@ def checking():
     if check == 0:
         for (ii, iline) in enumerate(relevant_lines):
             lower = iline[1].lower()
-            if "id" in lower:
-                if "pw" in lower:
-                    if "and" in lower:
-                        continue
-                    else:
-                        change_lines.insert(ii,
+            if "id" or "pw" in lower:
+                if "select" in lower:
+                    change_lines.insert(ii,
                                         (iline[0],
                                          "$statement = $connect->prepare('SELECT * FROM member WHERE ID = :id AND PW = :pw');\n"
                                          "$statement->bindValue(':id', $username, PDO::PARAM_STR);\n"
                                          "$statement->bindValue(':pw', $userpass, PDO::PARAM_STR);\n"
                                          "$statement->execute();\n"))
+
                 else:
                     continue
+
             else:
                 continue
 

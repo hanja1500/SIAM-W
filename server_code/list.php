@@ -36,15 +36,19 @@
                     <div class="date">작성일</div>
                     <div class="count">조회</div>
                 </div>
-            <div>
                 <?php
+                    $number = 1;
                     while( $result = $sql->fetch())
                     {
-                        echo '<div class="num">'.$result['ID'].'</div>';
+                        echo '<div class="row">';
+                        echo '<div class="num">'.$number.'</div>';
                         echo '<div class="title"><a href="view.php?ID='.$result['ID'].'">'.$result['Title'].'</a></div>';
                         echo '<div class="writer">'.$result['Writer'].'</div>';
                         echo '<div class="date">'.$result['Date'].'</div>';
                         echo '<div class="count">0</div>';
+                        echo '</div>';
+
+                        $number++;
                     }
                 ?>
             </div>
