@@ -33,13 +33,19 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("SIAM-W")
 
+        font = QFont()
+        font.setFamily("Noto Sans")
+        font.setPointSize(15)
+
         layout = QVBoxLayout()
 
         notice_layout = QHBoxLayout()
 
         notify = QLabel("Enter your URL to receive manual")
+        notify.setFont(font)
         code_button = QPushButton("revice your code")
         code_button.setFixedSize(200, 30)
+        code_button.setFont(font)
         code_button.clicked.connect(self.codeRevice)
         notice_layout.addWidget(notify)
         notice_layout.addWidget(code_button)
@@ -50,21 +56,26 @@ class MainWindow(QMainWindow):
 
         self.lineedit = QLineEdit()
         self.lineedit.setPlaceholderText("Enter your URL")
+        self.lineedit.setFont(font)
         self.lineedit.returnPressed.connect(self.execute)           # execute()
         input_layout.addWidget(self.lineedit)
 
         button = QPushButton("Enter")
+        button.setFont(font)
         button.setFixedSize(QSize(100, 30))
         button.clicked.connect(self.execute)                        # execute()
         input_layout.addWidget(button)
         
         self.vuln = QListWidget()
+        self.vuln.setFont(font)
         self.vuln.addItems(SQLi)
         self.vuln.currentItemChanged.connect(self.print_manual)     # print_manual()
         layout.addWidget(self.vuln)
+        self.vuln.setMaximumHeight(200)
 
         self.man = QLabel(manual)
-        self.man.setMaximumWidth(1000)
+        self.man.setFont(font)
+        self.man.setMaximumWidth(1500)
 
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
@@ -86,20 +97,28 @@ class MainWindow(QMainWindow):
             self.close()
 
     def codeRevice(self):
+
+        font = QFont()
+        font.setFamily("Noto Sans")
+        font.setPointSize(12)
+
         if self.dialog is None:
             self.dialog = QDialog(self)
         else:
             self.dialog = QDialog(self)
 
         self.dialog.setWindowTitle('Revice Your Code!')
+        self.dialog.setFont(font)
         self.dialog.setWindowModality(Qt.ApplicationModal)
-        self.dialog.resize(500, 400)
+        self.dialog.resize(900, 600)
         
         dialog_layout = QVBoxLayout(self.dialog)
         beginning_layout = QHBoxLayout()
 
         explanatory = QLabel("Select Your File here ->", self.dialog)
+        explanatory.setFont(font)
         file_button = QPushButton('Open', self.dialog)
+        file_button.setFont(font)
         file_button.setFixedSize(80, 30)
         file_button.clicked.connect(self.open)
         beginning_layout.addStretch()
@@ -107,6 +126,7 @@ class MainWindow(QMainWindow):
         beginning_layout.addWidget(file_button)
 
         self.reviced_code = QScrollArea(self.dialog)
+        self.reviced_code.setFont(font)
         self.reviced_code.setWidget(QLabel('your code will be reviced and show here.')) 
         
         dialog_layout.addLayout(beginning_layout)
@@ -137,9 +157,12 @@ class MainWindow(QMainWindow):
         
         self.line.clear()
         n = 0
+
         font = QFont()
+        font.setFamily("Noto Sans")
         font.setBold(True)
-        
+        font.setPointSize(12)
+
         if -1 in idx_list:
             for i in [-1, -2, -3]:
                 self.line.append(QLabel(str(revice_list.loc[i, 'Content']), self.dialog))
