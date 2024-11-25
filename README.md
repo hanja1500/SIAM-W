@@ -9,7 +9,7 @@
 
 * You can watch the screen pop up like the under screenshot.
 
-![screen1](https://github.com/hanja1500/SIAM-W/SIAM-W.png)
+![screen1](https://github.com/hanja1500/SIAM-W/blob/main/SIAM-W.png)
 
 * Plz Use it Freely! 
 
